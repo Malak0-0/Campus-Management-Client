@@ -34,14 +34,32 @@ const AllCampusesView = (props) => {
           backgroundColor: 'rgba(255, 255, 255, 0.7)',
           borderRadius: '12px',
           padding: '30px',
-          width: '70%'
+          width: '70%',
+          
         }}>
           <Link to={`/campus/${campus.id}`} style={{
               color: '#002145'
             }}>
             <h2>{campus.name}</h2>
           </Link>
+      
+    <img
+      src={campus.imageUrl && campus.imageUrl.trim() !== "" 
+            ? campus.imageUrl 
+            : "https://via.placeholder.com/400x250.png?text=Campus+Photo"}
+      alt={`${campus.name} campus`}
+      style={{
+        width: '100%',
+        maxWidth: '400px',
+        height: 'auto',
+        borderRadius: '8px',
+        margin: '20px 0'
+      }}
+    />
+
           <h4>campus id: {campus.id}</h4>
+
+
           <p>{campus.address}</p>
           <p>{campus.description}</p>
           </div>

@@ -10,7 +10,8 @@ class NewCampusContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "", 
+      name: "",
+      imageUrl: '', 
       address: "",
       description: "",
       redirect: false, 
@@ -30,14 +31,15 @@ class NewCampusContainer extends Component {
     const campus = {
       name: this.state.name,
       address: this.state.address,
-      description: this.state.description,
-      imageUrl: "",
+      imageUrl: this.state.imageUrl,
+      description: this.state.description
     };
 
     const newCampus = await this.props.addCampus(campus);
 
     this.setState({
       name: "", 
+      imageUrl: "", 
       address: "", 
       description: "",
       redirect: true,
@@ -55,16 +57,17 @@ class NewCampusContainer extends Component {
     }
 
     return (
-      <div>
-        <Header />
-        <NewCampusView
-          name={this.state.name}
-          address={this.state.address}
-          description={this.state.description}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-        />
-      </div>
+<div>
+    <Header />
+    <NewCampusView
+      name={this.state.name}
+      address={this.state.address}
+      description={this.state.description}
+      imageUrl={this.state.imageUrl}
+      handleChange={this.handleChange}
+      handleSubmit={this.handleSubmit}
+    />
+  </div>
     );
   }
 }
