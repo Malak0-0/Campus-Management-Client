@@ -18,24 +18,20 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    background: 'linear-gradient(to bottom, #002145 0%,rgb(78, 122, 187) 100%)',
+    boxShadow: 'none',
+  },
+  toolbar: {
+    minHeight: '100px', 
+  },
   title: {
     flexGrow: 1,
     textAlign: 'left',
-    fontType: 'bold',
+    fontWeight: 'bold',
     fontFamily: 'sans-serif', 
-    fontSize: '35px', 
-    color: 'darkblue'
-  },
-  appBar:{
-    backgroundColor: '#fcb6bb',
-    shadows: ['none'],
-  },
-  greeting:{
-    display: 'flex',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    width: "50%",
-    margin: "auto",
+    fontSize: '25px', 
+    color: 'white'
   },
   links:{
     textDecoration: 'none',
@@ -49,25 +45,29 @@ const Header = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static" elevation={0} className={classes.appBar}>
-        <Toolbar>
+      <Toolbar className={classes.toolbar}>
+
           <Typography variant="h6" className={classes.title} color="inherit" >
             Campus Management System
           </Typography>
 
           <Link className={classes.links} to={'/'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+            <Button variant="contained" color="primary" style={{marginRight: '20px',width: '150px',
+    borderRadius: '12px',}}>
               Home
             </Button>
           </Link>
 
           <Link className={classes.links} to={'/campuses'} >
-            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+            <Button variant="contained" color="primary" style={{marginRight: '20px',width: '155px',
+    borderRadius: '12px',}}>
               All Campuses
             </Button>
           </Link>
 
           <Link className={classes.links} to={'/students'} >
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" style={{marginRight: '18px',width: '155px',
+    borderRadius: '12px',}}>
               All Students
             </Button>
           </Link>
