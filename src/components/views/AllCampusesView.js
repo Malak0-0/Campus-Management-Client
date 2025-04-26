@@ -10,7 +10,8 @@ import { Link } from "react-router-dom";
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+
+    return ( <div style={{ textAlign: 'center', padding: '40px' }}>There are no campuses.</div>);
   }
 
   // If there is at least one campus, render All Campuses view 
@@ -26,8 +27,7 @@ const AllCampusesView = (props) => {
       <div style={{  marginTop: '40px', display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        gap: '30px',
-        marginTop: '40px' }}>
+        gap: '30px'}}>
 
       {props.allCampuses.map((campus) => (
         <div key={campus.id} style={{
