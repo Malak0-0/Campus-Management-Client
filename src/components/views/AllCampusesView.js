@@ -29,7 +29,7 @@ const AllCampusesView = (props) => {
         justifyContent: 'center',
         gap: '30px'}}>
 
-      {props.allCampuses.map((campus) => (
+      {props.allCampuses.slice().sort((a, b) => a.id - b.id).map((campus) => (
         <div key={campus.id} style={{
           backgroundColor: 'rgba(255, 255, 255, 0.7)',
           borderRadius: '12px',
