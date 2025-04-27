@@ -20,9 +20,9 @@ const CampusView = (props) => {
       <Link to={`/editcampus/${campus.id}`}>
       <button style={{
     marginTop: '20px',
-    width: '300px',
+    width: '250px',
     padding: '12px 24px',
-    fontSize: '20px',
+    fontSize: '18px',
     backgroundColor: 'rgb(48, 122, 65)',   
     color: 'white',
     border: '2px solid rgb(21, 72, 54)', 
@@ -35,9 +35,9 @@ const CampusView = (props) => {
         <button  onClick={() => deleteCampus(campus.id)}
           style={{
             marginTop: '20px',
-            width: '300px',
+            width: '250px',
             padding: '12px 24px',
-            fontSize: '20px',
+            fontSize: '18px',
             backgroundColor: '#dc3545',   
             color: 'white',
             border: '2px solid #a71d2a',  
@@ -45,6 +45,8 @@ const CampusView = (props) => {
             cursor: 'pointer',}}
               >Delete Campus</button>
       </Link> 
+      <h3>Total Students: {campus.students.length}</h3>
+
       {campus.students.map( student => {
         let name = student.firstname + " " + student.lastname;
         return (
