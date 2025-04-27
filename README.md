@@ -1,4 +1,4 @@
-# Campus Management System · Server
+# Campus Management System: Client
 
 This repository is the client (front-end) for Final Project - Full-Stack CRUD Application.
 
