@@ -18,11 +18,32 @@ const CampusView = (props) => {
       <p>{campus.address}</p>
       <p>{campus.description}</p>
       <Link to={`/editcampus/${campus.id}`}>
-        <button onClick={() => editCampus(campus)}>Edit Campus Information</button>
+      <button style={{
+    marginTop: '20px',
+    width: '300px',
+    padding: '12px 24px',
+    fontSize: '20px',
+    backgroundColor: 'rgb(48, 122, 65)',   
+    color: 'white',
+    border: '2px solid rgb(21, 72, 54)', 
+    borderRadius: '8px',
+    cursor: 'pointer',
+  }} onClick={() => editCampus(campus)}>Edit Campus Information</button>
       </Link> 
       <br/><br/>
       <Link to={'/campuses'}>
-        <button onClick={() => deleteCampus(campus.id)}>Delete Campus</button>
+        <button  onClick={() => deleteCampus(campus.id)}
+          style={{
+            marginTop: '20px',
+            width: '300px',
+            padding: '12px 24px',
+            fontSize: '20px',
+            backgroundColor: '#dc3545',   
+            color: 'white',
+            border: '2px solid #a71d2a',  
+            borderRadius: '8px',
+            cursor: 'pointer',}}
+              >Delete Campus</button>
       </Link> 
       {campus.students.map( student => {
         let name = student.firstname + " " + student.lastname;

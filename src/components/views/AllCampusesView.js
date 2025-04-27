@@ -46,18 +46,18 @@ const AllCampusesView = (props) => {
     <img
       src={campus.imageUrl && campus.imageUrl.trim() !== "" 
             ? campus.imageUrl 
-            : "https://via.placeholder.com/400x250.png?text=Campus+Photo"}
+            : "/images/campus.png"}
       alt={`${campus.name} campus`}
       style={{
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '150px',
         height: 'auto',
         borderRadius: '8px',
         margin: '20px 0'
       }}
     />
 
-          <h4>campus id: {campus.id}</h4>
+          <h4>Campus ID: {campus.id}</h4>
 
 
           <p>{campus.address}</p>
