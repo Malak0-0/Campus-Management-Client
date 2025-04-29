@@ -8,14 +8,45 @@ import { Link } from "react-router-dom";
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const {campus} = props;
+  const {campus, deleteCampus, editCampus} = props;
   
   // Render a single Campus view with list of its students
   return (
     <div>
       <h1>{campus.name}</h1>
+      <img src={campus.imageUrl} height="200" width="200" alt="college campus"/>
       <p>{campus.address}</p>
       <p>{campus.description}</p>
+      <Link to={`/editcampus/${campus.id}`}>
+      <button style={{
+    marginTop: '20px',
+    width: '250px',
+    padding: '12px 24px',
+    fontSize: '18px',
+    backgroundColor: 'rgb(48, 122, 65)',   
+    color: 'white',
+    border: '2px solid rgb(21, 72, 54)', 
+    borderRadius: '8px',
+    cursor: 'pointer',
+  }} onClick={() => editCampus(campus)}>Edit Campus Information</button>
+      </Link> 
+      <br/><br/>
+      <Link to={'/campuses'}>
+        <button  onClick={() => deleteCampus(campus.id)}
+          style={{
+            marginTop: '20px',
+            width: '250px',
+            padding: '12px 24px',
+            fontSize: '18px',
+            backgroundColor: '#dc3545',   
+            color: 'white',
+            border: '2px solid #a71d2a',  
+            borderRadius: '8px',
+            cursor: 'pointer',}}
+              >Delete Campus</button>
+      </Link> 
+      <h3>Total Students: {campus.students.length}</h3>
+
       {campus.students.map( student => {
         let name = student.firstname + " " + student.lastname;
         return (

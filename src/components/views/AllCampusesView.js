@@ -10,30 +10,77 @@ import { Link } from "react-router-dom";
 const AllCampusesView = (props) => {
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+
+    return ( <div style={{ textAlign: 'center', padding: '40px' }}>There are no campuses.</div>);
   }
 
   // If there is at least one campus, render All Campuses view 
   return (
-    <div>
-      <h1>All Campuses</h1>
+    <div style={{ textAlign: 'center', padding: '40px' }}>
+<h1 style={{
+        fontWeight: 'bold',
+        color: 'white',
+        borderBottom: '2px solid white',
+        marginBottom: '40px',
+      }}>
+        All Campuses</h1>
+      <div style={{  marginTop: '40px', display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '30px'}}>
 
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id}>
-          <Link to={`/campus/${campus.id}`}>
+      {props.allCampuses.slice().sort((a, b) => a.id - b.id).map((campus) => (
+        <div key={campus.id} style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          borderRadius: '12px',
+          padding: '30px',
+          width: '70%',
+          
+        }}>
+          <Link to={`/campus/${campus.id}`} style={{
+              color: '#002145'
+            }}>
             <h2>{campus.name}</h2>
           </Link>
-          <h4>campus id: {campus.id}</h4>
+      
+    <img
+      src={campus.imageUrl && campus.imageUrl.trim() !== "" 
+            ? campus.imageUrl 
+            : "/images/campus.png"}
+      alt={`${campus.name} campus`}
+      style={{
+        width: '100%',
+        maxWidth: '150px',
+        height: 'auto',
+        borderRadius: '8px',
+        margin: '20px 0'
+      }}
+    />
+
+          <h4>Campus ID: {campus.id}</h4>
+
+
           <p>{campus.address}</p>
           <p>{campus.description}</p>
-          <hr/>
-        </div>
+          </div>
       ))}
-      <br/>
-      <Link to={`/`}>
-        <button>Add New Campus</button>
+
+        </div>
+
+
+      <Link to={`/newcampus`}>
+      <button style={{
+          marginTop: '40px',
+          padding: '12px 24px',
+          fontSize: '20px',
+          backgroundColor: '#28a745', 
+          color: 'white',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+        }}>Add New Campus</button>
       </Link>
-      <br/><br/>
+
     </div>
   );
 };
