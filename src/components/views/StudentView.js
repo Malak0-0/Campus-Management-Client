@@ -5,7 +5,7 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display the single student view page.
 ================================================== */
 import { Link } from 'react-router-dom';
-import defaultStudentImage from '../../assets/images/student.png';
+//import defaultStudentImage from '../../assets/images/students.png';
 
 
 const StudentView = (props) => {
@@ -17,7 +17,16 @@ const StudentView = (props) => {
     <div style={{ textAlign: 'center', padding: '40px' }}>
     <div style={{ width: '400px', background: 'rgba(255,255,255,0.8)', borderRadius: '12px', padding: '30px', margin: 'auto' }}>
 
-    <img src={student.imageUrl} alt={`${student.firstname}'s profile`} width={200} style={{ borderRadius: '8px', marginBottom: '20px' }} />
+    <img
+  src={
+    student.imageUrl && student.imageUrl.trim() !== ""
+      ? student.imageUrl
+      : "/images/student.png"
+  }
+  alt={`${student.firstname}'s profile`}
+  width={200}
+  style={{ borderRadius: '8px', marginBottom: '20px' }}
+/>
 
     <h1 style={{ color: '#11153e', fontWeight: 'bold' }}>{student.firstname} {student.lastname}</h1>
 
