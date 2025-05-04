@@ -20,6 +20,9 @@ class NewStudentContainer extends Component {
     this.state = {
       firstname: "", 
       lastname: "", 
+      email: "",
+      imageUrl: "",
+      gpa: null,
       campusId: null, 
       redirect: false, 
       redirectId: null
@@ -40,8 +43,14 @@ class NewStudentContainer extends Component {
     let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
-        campusId: this.state.campusId
+        email: this.state.email,
+        imageUrl: this.state.imageUrl || undefined,
+        gpa: this.state.gpa,
     };
+        if (this.state.campusId) {
+          student.campusId = this.state.campusId;
+        }
+    
     
     // Add new student in back-end database
     let newStudent = await this.props.addStudent(student);
@@ -50,12 +59,17 @@ class NewStudentContainer extends Component {
     this.setState({
       firstname: "", 
       lastname: "", 
+      email: "",
+      imageUrl: "",
+      gpa: null,
       campusId: null, 
       redirect: true, 
-      redirectId: newStudent.id
+      redirectId: newStudent ? newStudent.id : null 
     });
   }
-
+  if (newStudent) {
+    const redirectId = newStudent.id;
+  }
   // Unmount when the component is being removed from the DOM:
   componentWillUnmount() {
       this.setState({redirect: false, redirectId: null});
