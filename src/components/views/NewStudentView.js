@@ -110,11 +110,11 @@ const NewStudentView = (props) => {
     style={{ flex: 1, padding: '10px', borderRadius: '8px' }}
     defaultValue=""
   >
-    <option value="" disabled>Select a campus</option>
-    {props.allCampuses && props.allCampuses.map((campus) => (
-      <option key={campus.id} value={campus.id}>
-        {campus.name}
-      </option>
+    <option value="">Select a campus</option>
+  {props.allCampuses?.map(campus => (
+    <option key={campus.id} value={campus.id}>
+      {campus.name}
+    </option>
     ))}
   </select>
 </div>
