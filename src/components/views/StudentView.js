@@ -5,6 +5,8 @@ The Views component is responsible for rendering web page with data provided by 
 It constructs a React component to display the single student view page.
 ================================================== */
 import { Link } from 'react-router-dom';
+import defaultStudentImage from '../../assets/images/student.png';
+
 
 const StudentView = (props) => {
   const { student } = props;
@@ -12,26 +14,30 @@ const StudentView = (props) => {
   // Render a single Student view 
   // added email, gpa and img
   return (
-    <div>
+    <div style={{ textAlign: 'center', padding: '40px' }}>
+    <div style={{ width: '400px', background: 'rgba(255,255,255,0.8)', borderRadius: '12px', padding: '30px', margin: 'auto' }}>
 
-      <img src={student.imageUrl} alt={`${student.firstname}'s profile`} width={200} />
-      <h1>{student.firstname + " " + student.lastname}</h1>
-      <h3>Email: {student.email}</h3>
-      <h3>Campus: {student.campus ? (
-          <Link to={`/campus/${student.campus.id}`}>
-            {student.campus.name}
-          </Link>
-        ) : "Student not enrolled in any campus yet"}
-      </h3>
-      <h3>GPA: {student.gpa ? (
-          student.gpa
-        ) : "GPA not found"}
-          </h3>
-          <Link to={`/student/edit/${student.id}`}>
-        <button>Edit</button>
+    <img src={student.imageUrl} alt={`${student.firstname}'s profile`} width={200} style={{ borderRadius: '8px', marginBottom: '20px' }} />
+
+    <h1 style={{ color: '#11153e', fontWeight: 'bold' }}>{student.firstname} {student.lastname}</h1>
+
+    {[
+  ['Email', student.email],
+  ['Campus', student.campus ? <Link to={`/campus/${student.campus.id}`}>{student.campus.name}</Link> : 'Not enrolled'],
+  ['GPA', student.gpa ?? 'Not available']
+].map(([label, value]) => (
+  <div key={label} style={{ marginBottom: '10px', textAlign: 'center' }}>
+    <span style={{ fontWeight: 'bold', color: '#11153e' }}>{label}:</span> {value}
+  </div>
+))}
+<br>
+</br>
+      <Link to={`/student/edit/${student.id}`}>
+        <button style={{ backgroundColor: '#28a745', color: 'white', fontWeight: 'bold', borderRadius: '8px', padding: '10px 20px', border: 'none' }}>Edit</button>
       </Link>
           </div>
-  );
+          </div>
+            );
 
 };
 
