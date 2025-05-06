@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Header from './Header';
 import EditStudentView from '../views/EditStudentView';
-import { fetchStudentThunk, editStudentThunk } from '../../store/thunks';
+import { fetchStudentThunk, editStudentThunk, fetchAllCampusesThunk } from '../../store/thunks';
 
 class EditStudentContainer extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class EditStudentContainer extends Component {
 
   async componentDidMount() {
     await this.props.fetchStudent(this.props.match.params.id);
+    await this.props.fetchAllCampuses(); 
     const { student } = this.props;
     if (student) {
       this.setState({
@@ -74,6 +75,7 @@ class EditStudentContainer extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           student={this.state}
+          allCampuses={this.props.allCampuses} 
         />
       </div>
     );
@@ -82,11 +84,14 @@ class EditStudentContainer extends Component {
 
 const mapState = (state) => ({
   student: state.student,
+  allCampuses: state.allCampuses,
 });
 
 const mapDispatch = (dispatch) => ({
   fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
   editStudent: (id, student) => dispatch(editStudentThunk(id, student)),
+  fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+
 });
 
 export default connect(mapState, mapDispatch)(EditStudentContainer);
