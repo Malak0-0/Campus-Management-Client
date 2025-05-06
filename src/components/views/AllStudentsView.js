@@ -14,7 +14,19 @@ const AllStudentsView = (props) => {
     <div>
       <p>There are no students.</p>
       <Link to={`newstudent`}>
-        <button>Add New Student</button>
+      <button
+  style={{
+    backgroundColor: '#28a745',
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '8px',
+    padding: '10px 20px',
+    border: 'none',
+    cursor: 'pointer'
+  }}
+>
+  Add New Student
+</button>
       </Link>
     </div>
     );
