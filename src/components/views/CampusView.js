@@ -19,25 +19,25 @@ const CampusView = (props) => {
       <p>{campus.description}</p>
       <Link to={`/editcampus/${campus.id}`}>
       <button style={{
-    marginTop: '20px',
-    width: '250px',
-    padding: '12px 24px',
-    fontSize: '18px',
+    marginTop: '16px',
+    width: '200px',
+    padding: '8px 16px',
+    fontSize: '16px',
     backgroundColor: 'rgb(48, 122, 65)',   
     color: 'white',
     border: '2px solid rgb(21, 72, 54)', 
     borderRadius: '8px',
     cursor: 'pointer',
-  }} onClick={() => editCampus(campus)}>Edit Campus Information</button>
+  }} onClick={() => editCampus(campus)}>Edit Campus </button>
       </Link> 
       <br/><br/>
       <Link to={'/campuses'}>
         <button  onClick={() => deleteCampus(campus.id)}
           style={{
-            marginTop: '20px',
-            width: '250px',
-            padding: '12px 24px',
-            fontSize: '18px',
+            marginTop: '16px',
+            width: '200px',
+            padding: '8px 16px',
+            fontSize: '16px',
             backgroundColor: '#dc3545',   
             color: 'white',
             border: '2px solid #a71d2a',  
