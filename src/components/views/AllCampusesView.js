@@ -11,8 +11,27 @@ const AllCampusesView = (props) => {
   // If there is no campus, display a message.
   if (!props.allCampuses.length) {
 
-    return ( <div style={{ textAlign: 'center', padding: '40px' }}>There are no campuses.</div>);
-  }
+    return (
+      <div>
+        <p>There are no campuses.</p>
+        <Link to={`newcampus`}>
+<button
+  style={{
+    backgroundColor: '#28a745',
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '8px',
+    padding: '10px 20px',
+    fontSize: '16px',
+    border: 'none',
+    cursor: 'pointer',
+  }}
+>
+  Add New Campus
+</button>        </Link>
+      </div>
+      );
+      }
 
   // If there is at least one campus, render All Campuses view 
   return (

@@ -69,9 +69,9 @@ class NewStudentContainer extends Component {
       redirectId: newStudent ? newStudent.id : null 
     });
   }
-  if (newStudent) {
-    const redirectId = newStudent.id;
-  }
+  // if (newStudent) {
+  //   const redirectId = newStudent.id;
+  // }
   // Unmount when the component is being removed from the DOM:
   componentWillUnmount() {
       this.setState({redirect: false, redirectId: null});

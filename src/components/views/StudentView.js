@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 
 const StudentView = (props) => {
-  const { student } = props;
+  const { student,deleteStudent } = props;
 
   // Render a single Student view 
   // added email, gpa and img
@@ -42,8 +42,28 @@ const StudentView = (props) => {
 <br>
 </br>
       <Link to={`/student/edit/${student.id}`}>
-        <button style={{ backgroundColor: '#28a745', color: 'white', fontWeight: 'bold', borderRadius: '8px', padding: '10px 20px', border: 'none' }}>Edit</button>
+        <button style={{ backgroundColor: '#28a745', color: 'white', fontWeight: 'bold', borderRadius: '8px', padding: '14px 24px', border: 'none',    width: '140px'  }}>Edit</button>
+
+
       </Link>
+      <br />
+
+<button
+  onClick={() => deleteStudent(student.id)}
+  style={{
+    backgroundColor: '#dc3545',
+    color: 'white',
+    fontWeight: 'bold',
+    borderRadius: '8px',
+    padding: '14px 24px',
+    border: 'none',
+    marginTop: '10px',
+    width: '140px' 
+  }}
+>
+  Delete
+</button>
+
           </div>
           </div>
             );

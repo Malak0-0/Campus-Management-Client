@@ -31,7 +31,7 @@ class NewCampusContainer extends Component {
     const campus = {
       name: this.state.name,
       address: this.state.address,
-      imageUrl: this.state.imageUrl,
+      imageUrl: this.state.imageUrl || undefined ,
       description: this.state.description
     };
 
