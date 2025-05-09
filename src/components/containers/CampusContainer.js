@@ -13,6 +13,9 @@ import { fetchCampusThunk,
   editCampusThunk
  } from "../../store/thunks";
 import { CampusView } from "../views";
+import { unenrollStudentThunk } from "../../store/thunks";
+
+
 
 class CampusContainer extends Component {
   // Get the specific campus data from back-end database
@@ -29,6 +32,8 @@ class CampusContainer extends Component {
         <CampusView campus={this.props.campus}
         deleteCampus={this.props.deleteCampus}
         editCampus={this.props.editCampus}
+        unenrollStudent={this.props.unenrollStudent}
+
  />
       </div>
     );
@@ -49,7 +54,9 @@ const mapDispatch = (dispatch) => {
   return {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
     deleteCampus: (campusId) => dispatch(deleteCampusThunk(campusId)),
-    editCampus: (campus) => dispatch(editCampusThunk(campus))
+    editCampus: (campus) => dispatch(editCampusThunk(campus)),
+    unenrollStudent: (studentId, campusId) => dispatch(unenrollStudentThunk(studentId, campusId))
+
   };
 };
 
