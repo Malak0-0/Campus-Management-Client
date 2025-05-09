@@ -54,7 +54,10 @@ const CampusView = (props) => {
           Total Students: {campus.students.length}
         </h3>
         <div style={{ marginTop: '20px' }}>
-  {campus.students.map(student => (
+        {campus.students.length === 0 ? (
+    <p style={{ color: '#333', fontStyle: 'italic' }}>There are no students enrolled currently.</p>
+  ) : (
+  campus.students.map(student => (
     <div key={student.id} style={{
       display: 'flex',
       justifyContent: 'space-between',
@@ -83,7 +86,8 @@ const CampusView = (props) => {
         Unenroll
       </button>
     </div>
-  ))}
+  ))
+)}
 
   <Link to="/newstudent">
     <button style={{

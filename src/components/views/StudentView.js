@@ -32,7 +32,7 @@ const StudentView = (props) => {
 
     {[
   ['Email', student.email],
-  ['Campus', student.campus ? <Link to={`/campus/${student.campus.id}`}>{student.campus.name}</Link> : 'Not enrolled'],
+  ['Campus', student.campus ? <Link to={`/campus/${student.campus.id}`}>{student.campus.name}</Link> : 'Not currently enrolled in a college'],
   ['GPA', student.gpa ?? 'Not available']
 ].map(([label, value]) => (
   <div key={label} style={{ marginBottom: '10px', textAlign: 'center' }}>
