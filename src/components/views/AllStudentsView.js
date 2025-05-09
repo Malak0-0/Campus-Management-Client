@@ -94,7 +94,7 @@ const cardsContainerStyle = {
   gap: '16px',
 };
 const cardStyle = {
-  backgroundColor: 'rgba(255, 255, 255, 0.85)',
+  backgroundColor: 'rgba(255, 255, 255, 0.7)',
   borderRadius: '8px',
   width: '400px',
   minHeight: '80px',

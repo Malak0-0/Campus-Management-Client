@@ -21,56 +21,75 @@ class EditStudentContainer extends Component {
       gpa: "",
       campusId: "",
       redirect: false,
+      errors: {}
     };
   }
 
-  async componentDidMount() {
-    await this.props.fetchStudent(this.props.match.params.id);
-    await this.props.fetchAllCampuses(); 
-    const { student } = this.props;
-    if (student) {
-      this.setState({
-        firstname: student.firstname || "",
-        lastname: student.lastname || "",
-        email: student.email || "",
-        imageUrl: student.imageUrl || "",
-        gpa: student.gpa ?? "",
-        campusId: student.campusId ?? "",
-      });
-    }
+  componentDidMount() {
+    const { fetchStudent, fetchAllCampuses, match } = this.props;
+    
+    Promise.all([
+      fetchStudent(match.params.id),
+      fetchAllCampuses()
+    ]).then(() => {
+      const { student } = this.props;
+      if (student) {
+        this.setState({
+          firstname: student.firstname || "",
+          lastname: student.lastname || "",
+          email: student.email || "",
+          imageUrl: student.imageUrl || "",
+          gpa: student.gpa ?? "",
+          campusId: student.campusId ?? "",
+        });
+      }
+    });
   }
 
   handleChange = (event) => {
+    const { name, value } = event.target;
     this.setState({
-      [event.target.name]: event.target.value,
+      [name]: name === "campusId" ? Number(value) : value,  // ✅ convert campusId to number
     });
   };
-
   handleSubmit = async (event) => {
     event.preventDefault();
-
-      const { firstname, lastname, email } = this.state;
-  const errors = {};
-
-  if (!firstname.trim()) errors.firstname = "First name is required.";
-  if (!lastname.trim()) errors.lastname = "Last name is required.";
-  if (!email.trim()) errors.email = "Email is required.";
-  if (Object.keys(errors).length > 0) {
-    this.setState({ errors });
+  
+    const { firstname, lastname, email } = this.state;
+    const errors = {};
+  
+    if (!firstname.trim()) errors.firstname = "First name is required.";
+    if (!lastname.trim()) errors.lastname = "Last name is required.";
+    if (!email.trim()) errors.email = "Email is required.";
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+    
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
       return;
     }
+  
     const updatedStudent = {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      email: this.state.email,
-      imageUrl: this.state.imageUrl,
-      gpa: this.state.gpa,
-      campusId: this.state.campusId,
+      firstname: this.state.firstname.trim(),
+      lastname: this.state.lastname.trim(),
+      email: this.state.email.trim(),
+      imageUrl: this.state.imageUrl.trim(),
+      gpa: this.state.gpa ? Number(this.state.gpa) : null,
+      campusId: this.state.campusId ? Number(this.state.campusId) : null,
     };
-   // update student in database
-    await this.props.editStudent(this.props.match.params.id, updatedStudent);
-//  redirects in order to show the updated student
-    this.setState({ redirect: true });
+  
+    try {
+      await this.props.editStudent(this.props.match.params.id, updatedStudent);
+      this.setState({ redirect: true });
+    } catch (error) {
+      console.error("Failed to update student:", error);
+      this.setState({ 
+        errors: { 
+          submit: "Failed to update student. Please try again." 
+        } 
+      });
+    }
   };
 
   render() {
