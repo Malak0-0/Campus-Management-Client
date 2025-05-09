@@ -49,6 +49,16 @@ class EditStudentContainer extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
 
+      const { firstname, lastname, email } = this.state;
+  const errors = {};
+
+  if (!firstname.trim()) errors.firstname = "First name is required.";
+  if (!lastname.trim()) errors.lastname = "Last name is required.";
+  if (!email.trim()) errors.email = "Email is required.";
+  if (Object.keys(errors).length > 0) {
+    this.setState({ errors });
+      return;
+    }
     const updatedStudent = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -76,6 +86,8 @@ class EditStudentContainer extends Component {
           handleSubmit={this.handleSubmit}
           student={this.state}
           allCampuses={this.props.allCampuses} 
+          errors={this.state.errors}
+
         />
       </div>
     );

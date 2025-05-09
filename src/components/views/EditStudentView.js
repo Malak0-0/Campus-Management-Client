@@ -54,7 +54,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const EditStudentView = ({ handleChange, handleSubmit, student, allCampuses }) => {
+const EditStudentView = ({ handleChange, handleSubmit, student, allCampuses, errors = {} }) => {
   const classes = useStyles();
 
   return (
@@ -69,7 +69,8 @@ const EditStudentView = ({ handleChange, handleSubmit, student, allCampuses }) =
             ['Image URL', 'imageUrl', 'text'],
             ['GPA', 'gpa', 'number']
           ].map(([label, name, type]) => (
-            <div className={classes.row} key={name}>
+            <div key={name} style={{ marginBottom: '15px' }}>
+            <div className={classes.row}>
               <label className={classes.label}>{label}:</label>
               <input
                 className={classes.input}
@@ -80,7 +81,13 @@ const EditStudentView = ({ handleChange, handleSubmit, student, allCampuses }) =
                 {...(name === 'gpa' && { min: 0, max: 4, step: 0.1 })}
               />
             </div>
-          ))}
+            {errors[name] && (
+      <p style={{ color: 'red', fontSize: '0.75rem', marginLeft: '130px', textAlign: 'left' }}>
+        {errors[name]}
+      </p>
+    )}
+  </div>
+))}
 
           {/* dropdown menufor campuses */}
           <div className={classes.row}>
