@@ -33,7 +33,7 @@ const useStyles = makeStyles( () => ({
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit, student, allCampuses, errors = {} } = props;
+  const {handleChange, handleSubmit, student, errors = {} } = props;
   const classes = useStyles();
 
   // Render a New Student view with an input form
