@@ -11,8 +11,8 @@ const AllStudentsView = (props) => {
   // If there is no student, display a message
   if (!students.length) {
     return (
-    <div>
-      <p>There are no students.</p>
+      <div style={{ textAlign: 'center', color: 'white',    fontWeight: 'bold', padding: '40px' }}>
+        <p>There are no students.</p>
       <Link to={`newstudent`}>
       <button
   style={{
@@ -34,22 +34,39 @@ const AllStudentsView = (props) => {
   
   // If there is at least one student, render All Students view 
   return (
-    <div>
-      <h1>All Students</h1>
+    <div style={{ textAlign: 'center', color: 'white', fontWeight: 'bold', padding: '40px' }}>
+    <h1>All Students</h1>
+      <hr/>
 
+      <div style={cardsContainerStyle}>     
       {students.map((student) => {
-          let name = student.firstname + " " + student.lastname;
+          const name = `${student.firstname} ${student.lastname}`;
+          const campusName = student.campus ? student.campus.name : "Not currently enrolled in a college";
+
           return (
-            <div key={student.id}>
-              <Link to={`/student/${student.id}`}>
-                <h2>{name}</h2>
+            <div key={student.id} style={cardStyle}>
+              <Link to={`/student/${student.id}`} style={nameLinkStyle}>
+              <h2>{name}</h2>
               </Link>
-              <hr/>
+              <img
+                src={
+                  student.imageUrl && student.imageUrl.trim() !== ""
+                    ? student.imageUrl
+                    : "/images/student.png"
+                }
+                alt="student"
+                style={imageStyle}
+              />
+                  <p style={{ fontSize: '0.8rem', color: '#000' }}>
+                  <strong>Campus:</strong> {campusName}</p>
+
             </div>
           );
         }
       )}
-      <br/>
+
+      </div>
+      <br/><br/>
       <Link to={`/newstudent`}>
       <button
   style={{
@@ -70,5 +87,35 @@ const AllStudentsView = (props) => {
   );
 };
 
+const cardsContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column', 
+  alignItems: 'center',
+  gap: '16px',
+};
+const cardStyle = {
+  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  borderRadius: '8px',
+  width: '400px',
+  minHeight: '80px',
+  maxeight: '70px',
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+};
+
+const imageStyle = {
+  width: '60px',
+  height: '60px',
+  objectFit: 'cover',
+  borderRadius: '50%',
+  margin: '10px auto',
+};
+const nameLinkStyle = {
+  color: '#002145',
+  textDecoration: 'underline',
+  cursor: 'pointer',
+};
 
 export default AllStudentsView;

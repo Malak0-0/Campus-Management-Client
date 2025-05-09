@@ -41,7 +41,16 @@ class NewStudentContainer extends Component {
   // Take action after user click the submit button
   handleSubmit = async event => {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
+    const { firstname, lastname, email } = this.state;
+    const errors = {};
 
+    if (!firstname.trim()) errors.firstname = "First name is required.";
+    if (!lastname.trim()) errors.lastname = "Last name is required.";
+    if (!email.trim()) errors.email = "Email is required.";
+    if (Object.keys(errors).length > 0) {
+      this.setState({ errors });
+      return;
+    }
     let student = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -66,6 +75,7 @@ class NewStudentContainer extends Component {
       gpa: null,
       campusId: null, 
       redirect: true, 
+      errors: {},
       redirectId: newStudent ? newStudent.id : null 
     });
   }
@@ -94,7 +104,9 @@ class NewStudentContainer extends Component {
         <NewStudentView 
           handleChange = {this.handleChange} 
           handleSubmit={this.handleSubmit} 
-          allCampuses={this.props.allCampuses} //show campuses to view     
+          allCampuses={this.props.allCampuses} //show campuses to view   
+          student={this.state}
+          errors={this.state.errors}  
         />
       </div>          
     );

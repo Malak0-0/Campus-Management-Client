@@ -24,18 +24,16 @@ const useStyles = makeStyles( () => ({
     color: '#11153e',
     marginBottom: '20px',
   },
-  button: {
-    backgroundColor: '#28a745',
-    color: 'white',
-    fontWeight: 'bold',
-    borderRadius: '8px',
-    padding: '10px 20px',
-    marginTop: '10px',
-  },
+  errorText: {
+    color: 'red',
+    fontSize: '0.75rem',
+    marginLeft: '130px',
+    textAlign: 'left',
+  }
 }));
 
 const NewStudentView = (props) => {
-  const {handleChange, handleSubmit } = props;
+  const {handleChange, handleSubmit, student, allCampuses, errors = {} } = props;
   const classes = useStyles();
 
   // Render a New Student view with an input form
@@ -51,7 +49,6 @@ const NewStudentView = (props) => {
         Add a New Student
       </h1>
 
-      <div className={classes.root}>
         <div className={classes.formContainer}>
           <div className={classes.formTitle}>
             <Typography style={{fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e'}}>
@@ -61,19 +58,33 @@ const NewStudentView = (props) => {
           <form style={{textAlign: 'center'}} onSubmit={(e) => handleSubmit(e)}>
 
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-        <label style={{ color: '#11153e', fontWeight: 'bold', width: '120px', textAlign: 'right', marginRight: '10px' }}>First Name:</label>
-  <input
-    type="text"
-    name="firstname"
-    onChange={handleChange}
-    style={{ flex: 1, padding: '10px', borderRadius: '8px' }}
-  />
-</div>         
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-    <label style={{ color: '#11153e', fontWeight: 'bold', width: '120px', textAlign: 'right', marginRight: '10px' }}>Last Name:</label>
-    <input type="text" name="lastname" onChange={handleChange} style={{ flex: 1, padding: '10px', borderRadius: '8px' }} />
-  </div>
+          <div style={{ marginBottom: '15px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label style={labelStyle}>First Name:</label>
+              <input
+                type="text"
+                name="firstname"
+                value={student.firstname}
+                onChange={handleChange}
+                style={inputStyle}
+              />
+            </div>
+            {errors.firstname && <p className={classes.errorText}>{errors.firstname}</p>}
+          </div>
+
+<div style={{ marginBottom: '15px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <label style={labelStyle}>Last Name:</label>
+              <input
+                type="text"
+                name="lastname"
+                value={student.lastname}
+                onChange={handleChange}
+                style={inputStyle}
+              />
+            </div>
+            {errors.lastname && <p className={classes.errorText}>{errors.lastname}</p>}
+          </div>
       {/* includedd email the imageUr and gpa  */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
     <label style={{ color: '#11153e', fontWeight: 'bold', width: '120px', textAlign: 'right', marginRight: '10px' }}>Email:</label>
@@ -126,9 +137,21 @@ const NewStudentView = (props) => {
             <br/>
           </form>
           </div>
-      </div>
-    </div>    
+      </div>  
   )
 }
+const labelStyle = {
+  color: '#11153e',
+  fontWeight: 'bold',
+  width: '120px',
+  textAlign: 'right',
+  marginRight: '10px',
+};
+
+const inputStyle = {
+  flex: 1,
+  padding: '10px',
+  borderRadius: '8px',
+};
 
 export default NewStudentView;

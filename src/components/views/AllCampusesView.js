@@ -12,7 +12,7 @@ const AllCampusesView = (props) => {
   if (!props.allCampuses.length) {
 
     return (
-      <div>
+      <div style={{ textAlign: 'center', color: 'white',    fontWeight: 'bold', padding: '40px' }}>
         <p>There are no campuses.</p>
         <Link to={`newcampus`}>
 <button

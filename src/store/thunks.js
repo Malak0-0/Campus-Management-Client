@@ -129,3 +129,17 @@ export const fetchStudentThunk = id => async dispatch => {  // The THUNK
     console.error(err);
   }
 };
+// unenrolling by editing to null
+export const updateStudentThunk = (student) => async (dispatch) => {
+  try {
+    let res = await axios.put(`/api/students/${student.id}`, student);
+    dispatch(ac.editStudent(res.data)); 
+  } catch (err) {
+    console.error(err);
+  }
+};
+export const unenrollStudentThunk = (studentId, campusId) => async (dispatch) => {
+  await dispatch(updateStudentThunk({ id: studentId, campusId: null }));
+  await dispatch(fetchCampusThunk(campusId)); 
+};
+
